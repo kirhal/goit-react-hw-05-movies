@@ -1,20 +1,24 @@
 import { useState, useEffect } from 'react';
-import { fetchTrendingDay } from '../instruments/fetchAPI';
+import { useFetch } from '../instruments/fetchContext';
+import axios from 'axios';
+
 import { ListItem, MovieLink } from './Home.styled';
 
 export default function Home() {
   const [trending, setTrending] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { url, key } = useFetch();
 
   useEffect(() => {
-    fetch();
+    fetchTrending();
   }, []);
 
-  const fetch = async () => {
+  const fetchTrending = async () => {
+    const DAY_TREND = 'trending/movie/day?api_key=';
     try {
       setIsLoading(true);
-      const data = await fetchTrendingDay();
-      setTrending(data);
+      const response = await axios.get(`${url}${DAY_TREND}${key}`);
+      setTrending(response.data.results);
     } catch (error) {
       console.log(error);
     } finally {

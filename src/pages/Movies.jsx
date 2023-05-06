@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Form } from 'react-router-dom';
-import { fetchTrendingDay } from '../instruments/fetchAPI';
 
 export default function Movies() {
-  const [request, setRequest] = useState('');
+  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
