@@ -1,18 +1,16 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export const StyledLink = styled(NavLink)`
-  display: inline-block;
-  margin-right: 20px;
+export const ListItem = styled.li`
+  margin-bottom: 3px;
+`;
 
-  color: black;
-  text-decoration: none;
+export const MovieLink = styled(Link)`
+  color: blue;
 
-  font-size: 30px;
-  font-weight: bold;
-  font-family: Roboto;
+  font-size: 20px;
 
-  &.active {
+  &:focus {
     color: red;
   }
 `;

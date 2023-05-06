@@ -1,23 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchTrendingDay } from '../instruments/fetchAPI';
+import { ListItem, MovieLink } from './Home.styled';
 
 export default function Home() {
-  const [trending, setTrnding] = useState(fetchTranding());
+  const [trending, setTrending] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  fetchTrendingDay().then(console.log);
+  useEffect(() => {
+    fetch();
+  }, []);
 
-  const fetchTranding = async () => {
+  const fetch = async () => {
     try {
-      return await fetchTrendingDay();
+      setIsLoading(true);
+      const data = await fetchTrendingDay();
+      setTrending(data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
       <h1>Tranding today</h1>
-      <ul>{trending.map()}</ul>
+      {isLoading && <span>Loading</span>}
+      {trending.length > 0 && (
+        <ul>
+          {trending.map(film => (
+            <ListItem key={film.id}>
+              <MovieLink to="/">{film.title}</MovieLink>
+            </ListItem>
+          ))}
+        </ul>
+      )}
     </>
   );
 }
