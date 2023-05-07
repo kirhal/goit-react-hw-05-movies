@@ -17,7 +17,7 @@ export default function MovieData({ movie }) {
 
   return (
     <>
-      <img src={IMAGE_URL + movie.poster_path}></img>
+      <img src={IMAGE_URL + movie.poster_path} alt={movie.title}></img>
       <h2>
         {movie.original_title} {`(${getYear(movie.release_date)})`}
       </h2>

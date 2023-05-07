@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useContexFetch } from '../instruments/fetchContext';
 import { ToastContainer, toast } from 'react-toastify';
 import SearchList from '../components/Movies/SearchList';
+
 import axios from 'axios';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +12,7 @@ export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { url, key } = useContexFetch();  
+  const { url, key } = useContexFetch();
 
   useEffect(() => {
     if (query) {
@@ -70,7 +71,7 @@ export default function Movies() {
       </form>
       {isLoading && <span>Loading</span>}
       {error && <h2>{error}</h2>}
-      {movies.length !== 0 && !isLoading && <SearchList movies={movies} />}
+      {movies.length !== 0 && !isLoading && <SearchList movies={movies} />}      
     </>
   );
 }

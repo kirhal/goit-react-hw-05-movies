@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useContexFetch } from '../instruments/fetchContext';
-import { useParams } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 import axios from 'axios';
 
 import { ListItem, MovieLink } from './Home.styled';
@@ -23,7 +23,6 @@ export default function MovieDetails() {
       const response = await axios
         .get(`${url}movie/${movieId}?${key}&language=en-US`)
         .then(res => {
-          console.log(res.data);
           return res.data;
         });
       setMovie(response);
@@ -51,6 +50,7 @@ export default function MovieDetails() {
             <MovieLink to="reviews">Reviews</MovieLink>
           </ListItem>
         </ul>
+        <Outlet />
       </div>
     </>
   );
