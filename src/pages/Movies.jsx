@@ -24,7 +24,7 @@ export default function Movies() {
       setIsLoading(true);
       const response = await axios
         .get(
-          `${url}search/movie?api_key=${key}&language=en-US&query=${query}&page=1&include_adult=false`
+          `${url}search/movie?${key}&language=en-US&query=${query}&page=1&include_adult=false`
         )
         .then(res => {
           return res.data.results;

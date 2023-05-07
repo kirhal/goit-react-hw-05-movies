@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter basename="/goit-react-hw-05-movies">
       <FetchContext.Provider
         value={{
-          key: '333f62a31a9dde0333a7ccfec8a873a5',
+          key: 'api_key=333f62a31a9dde0333a7ccfec8a873a5',
           url: 'https://api.themoviedb.org/3/',
         }}
       >

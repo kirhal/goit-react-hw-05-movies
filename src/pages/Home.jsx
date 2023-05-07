@@ -14,7 +14,7 @@ export default function Home() {
   }, []);
 
   const fetchTrending = async () => {
-    const DAY_TREND = 'trending/movie/day?api_key=';
+    const DAY_TREND = 'trending/movie/day?';
     try {
       setIsLoading(true);
       const response = await axios.get(`${url}${DAY_TREND}${key}`);
