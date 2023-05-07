@@ -9,6 +9,8 @@ export default function MovieDetails() {
   const { movieId } = useParams();
   const { url, key } = useContexFetch();
 
+  const IMAGE_URL = 'https://image.tmdb.org/t/p/w300';
+
   useEffect(() => {
     fetchMovie();
   }, []);
@@ -49,7 +51,7 @@ export default function MovieDetails() {
         {isLoading && <span>Loading</span>}
         {movie.id && (
           <>
-            <img href=""></img>
+            <img src={IMAGE_URL + movie.poster_path}></img>
             <h2>
               {movie.original_title} {`(${getYear(movie.release_date)})`}
             </h2>

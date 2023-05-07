@@ -11,7 +11,7 @@ export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { url, key } = useContexFetch();
+  const { url, key } = useContexFetch();  
 
   useEffect(() => {
     if (query) {

@@ -9,6 +9,8 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const { url, key } = useContexFetch();
 
+  // const IMAGE_URL = 'https://image.tmdb.org/t/p/w200';
+
   useEffect(() => {
     fetchTrending();
   }, []);
@@ -34,7 +36,10 @@ export default function Home() {
         <ul>
           {trending.map(movie => (
             <ListItem key={movie.id}>
-              <MovieLink to={`/movies/${movie.id}`}>{movie.title}</MovieLink>
+              <MovieLink to={`/movies/${movie.id}`}>
+                {/* <img src={IMAGE_URL + movie.poster_path} /> */}
+                {movie.title}
+              </MovieLink>
             </ListItem>
           ))}
         </ul>
