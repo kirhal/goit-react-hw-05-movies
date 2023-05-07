@@ -22,7 +22,7 @@ export default function Cast() {
       setIsLoading(true);
       const response = await axios
         .get(`${url}movie/${movieId}/credits?${key}&language=en-US`)
-        .then(res => {          
+        .then(res => {
           return res.data.cast;
         });
 
