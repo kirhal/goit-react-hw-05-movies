@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useFetch } from '../instruments/fetchContext';
+import { useContexFetch } from '../instruments/fetchContext';
 import { ToastContainer, toast } from 'react-toastify';
 import SearchList from '../components/Movies/SearchList';
 import axios from 'axios';
@@ -11,7 +11,7 @@ export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { url, key } = useFetch();
+  const { url, key } = useContexFetch();
 
   useEffect(() => {
     if (query) {
@@ -70,7 +70,7 @@ export default function Movies() {
       </form>
       {isLoading && <span>Loading</span>}
       {error && <h2>{error}</h2>}
-      {movies.length !== 0 && !isLoading && <SearchList array={movies} />}
+      {movies.length !== 0 && !isLoading && <SearchList movies={movies} />}
     </>
   );
 }

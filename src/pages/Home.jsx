@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useFetch } from '../instruments/fetchContext';
+import { useContexFetch } from '../instruments/fetchContext';
 import axios from 'axios';
 
 import { ListItem, MovieLink } from './Home.styled';
@@ -7,7 +7,7 @@ import { ListItem, MovieLink } from './Home.styled';
 export default function Home() {
   const [trending, setTrending] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { url, key } = useFetch();
+  const { url, key } = useContexFetch();
 
   useEffect(() => {
     fetchTrending();
@@ -32,9 +32,9 @@ export default function Home() {
       {isLoading && <span>Loading</span>}
       {trending.length > 0 && (
         <ul>
-          {trending.map(film => (
-            <ListItem key={film.id}>
-              <MovieLink to="/">{film.title}</MovieLink>
+          {trending.map(movie => (
+            <ListItem key={movie.id}>
+              <MovieLink to={`/movies/${movie.id}`}>{movie.title}</MovieLink>
             </ListItem>
           ))}
         </ul>

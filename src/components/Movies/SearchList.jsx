@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 
 import { ListItem, MovieLink } from '../../pages/Home.styled';
 
-export default function SearchList({ array }) {
+export default function SearchList({ movies }) {
   return (
     <ul>
-      {array.map(film => (
-        <ListItem key={film.id}>
-          <MovieLink to="/movies">{film.title}</MovieLink>
+      {movies.map(movie => (
+        <ListItem key={movie.id}>
+          <MovieLink to={`${movie.id}`}>{movie.title}</MovieLink>
         </ListItem>
       ))}
     </ul>
