@@ -19,10 +19,8 @@ export default function Reviews() {
       const response = await axios
         .get(`${url}movie/${movieId}/reviews?${key}&language=en-US&page=1`)
         .then(res => {
-          console.log('review', res.data.results);
           return res.data.results;
         });
-
       setReviews(response);
     } catch (error) {
       console.log(error);
@@ -35,15 +33,14 @@ export default function Reviews() {
     <>
       {isLoading && <span>Loading</span>}
       <ul>
-        {/* {reviews.length !== 0 &&
+        {reviews.length !== 0 &&
           !isLoading &&
           reviews.map(review => (
-            <li key={actor.cast_id}>
-              <span>Name: {actor.name}</span>
-              <span>Character: {actor.character}</span>
-              <p></p>
+            <li key={review.id}>
+              <span>Author: {review.author_details.username}</span>
+              <p>{review.content}</p>
             </li>
-          ))} */}
+          ))}
       </ul>
     </>
   );

@@ -22,8 +22,7 @@ export default function MovieDetails() {
       setIsLoading(true);
       const response = await axios
         .get(`${url}movie/${movieId}?${key}&language=en-US`)
-        .then(res => {
-          console.log('Details');
+        .then(res => {          
           return res.data;
         });
       setMovie(response);
