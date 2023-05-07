@@ -3,6 +3,8 @@ import { useContexFetch } from '../../instruments/fetchContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import CastData from './CastData';
+
 export default function Cast() {
   const [cast, setCast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +23,7 @@ export default function Cast() {
       const response = await axios
         .get(`${url}movie/${movieId}/credits?${key}&language=en-US`)
         .then(res => {
-          console.log(res.data.cast);
+          console.log('cast');
           return res.data.cast;
         });
 
@@ -36,25 +38,7 @@ export default function Cast() {
   return (
     <>
       {isLoading && <span>Loading</span>}
-      <ul>
-        {cast.length !== 0 &&
-          !isLoading &&
-          cast.map(actor => (
-            <li key={actor.cast_id}>
-              {actor.profile_path ? (
-                <img src={IMAGE_URL + actor.profile_path} alt={actor.name} />
-              ) : (
-                <img
-                  src="https://i.postimg.cc/Bvs51Cct/360-F-234348839-k-Inlh-Js-XZez-Ky-Tb-XHde6693v-S9-Aby4e-Z.jpg"
-                  alt={actor.name}
-                />
-              )}
-
-              <span>Name: {actor.name}</span>
-              <span>Character: {actor.character}</span>
-            </li>
-          ))}
-      </ul>
+      {cast.length !== 0 && !isLoading && <CastData cast={cast} />}
     </>
   );
 }
