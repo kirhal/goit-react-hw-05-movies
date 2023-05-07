@@ -35,7 +35,11 @@ export default function MovieDetails() {
       .map(genre => {
         return genre.name;
       })
-      .join(' ');
+      .join(', ');
+  };
+  const getYear = data => {
+    const date = new Date(data);
+    return date.getFullYear();
   };
 
   return (
@@ -46,7 +50,9 @@ export default function MovieDetails() {
         {movie.id && (
           <>
             <img href=""></img>
-            <h2>{movie.original_title}</h2>
+            <h2>
+              {movie.original_title} {`(${getYear(movie.release_date)})`}
+            </h2>
             <p>
               User scores: {movie.vote_average.toFixed(1)}
               /10
