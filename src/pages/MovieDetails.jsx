@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useContexFetch } from '../instruments/fetchContext';
-import { useParams, Outlet } from 'react-router-dom';
+import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { ListItem, MovieLink } from './Home.styled';
@@ -12,6 +12,9 @@ export default function MovieDetails() {
   const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
   const { url, key } = useContexFetch();
+
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     fetchMovie();
@@ -36,7 +39,9 @@ export default function MovieDetails() {
   return (
     <>
       <div>
-        <button>Go back</button>
+        <Link to={backLinkHref}>
+          <button>Go back</button>
+        </Link>
         {isLoading && <span>Loading</span>}
         {movie.id && <MovieData movie={movie} />}
       </div>

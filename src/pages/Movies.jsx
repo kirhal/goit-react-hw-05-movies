@@ -37,7 +37,6 @@ export default function Movies() {
       if (response.length === 0) {
         setError('No results');
       }
-      console.log(response);
       setMovies(response);
     } catch (error) {
       setError(error);
