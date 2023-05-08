@@ -1,7 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import * as API from '../../instruments/fetchAPI';
 
-import { Title} from './Home.styled';
+import { Title } from './Home.styled';
 
 const MoviesList = lazy(() => import('../../components/Movie/MoviesList'));
 
