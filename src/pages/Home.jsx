@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useContexFetch } from '../instruments/fetchContext';
+import { yearTransform } from '../instruments/dateTransform';
 import axios from 'axios';
 
 import { ListItem, MovieLink } from './Home.styled';
@@ -38,7 +39,7 @@ export default function Home() {
             <ListItem key={movie.id}>
               <MovieLink to={`/movies/${movie.id}`}>
                 {/* <img src={IMAGE_URL + movie.poster_path} /> */}
-                {movie.title}
+                {movie.title} {`(${yearTransform(movie.release_date)})`}
               </MovieLink>
             </ListItem>
           ))}

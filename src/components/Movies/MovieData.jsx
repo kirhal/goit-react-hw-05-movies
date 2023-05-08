@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { yearTransform } from '../../instruments/dateTransform';
 
 export default function MovieData({ movie }) {
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w300';
@@ -10,16 +11,12 @@ export default function MovieData({ movie }) {
       })
       .join(', ');
   };
-  const getYear = data => {
-    const date = new Date(data);
-    return date.getFullYear();
-  };
 
   return (
     <>
       <img src={IMAGE_URL + movie.poster_path} alt={movie.title}></img>
       <h2>
-        {movie.original_title} {`(${getYear(movie.release_date)})`}
+        {movie.original_title} {`(${yearTransform(movie.release_date)})`}
       </h2>
       <p>
         User scores: {movie.vote_average.toFixed(1)}

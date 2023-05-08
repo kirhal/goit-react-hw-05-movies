@@ -32,16 +32,19 @@ export default function Reviews() {
   return (
     <>
       {isLoading && <span>Loading</span>}
-      <ul>
-        {reviews.length !== 0 &&
-          !isLoading &&
-          reviews.map(review => (
+      {reviews.length === 0 && !isLoading && (
+        <h3>We don't have any reviews for this movie</h3>
+      )}
+      {reviews.length !== 0 && !isLoading && (
+        <ul>
+          {reviews.map(review => (
             <li key={review.id}>
               <span>Author: {review.author_details.username}</span>
               <p>{review.content}</p>
             </li>
           ))}
-      </ul>
+        </ul>
+      )}
     </>
   );
 }

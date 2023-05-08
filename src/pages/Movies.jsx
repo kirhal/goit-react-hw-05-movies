@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useContexFetch } from '../instruments/fetchContext';
 import { ToastContainer, toast } from 'react-toastify';
 import SearchList from '../components/Movies/SearchList';
@@ -8,11 +9,13 @@ import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Movies() {
-  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
   const { url, key } = useContexFetch();
+
+  const query = searchParams.get('query') ?? '';
 
   useEffect(() => {
     if (query) {
@@ -34,6 +37,7 @@ export default function Movies() {
       if (response.length === 0) {
         setError('No results');
       }
+      console.log(response);
       setMovies(response);
     } catch (error) {
       setError(error);
@@ -52,7 +56,7 @@ export default function Movies() {
     } else if (value === query) {
       toast.info('Try another search word');
     } else {
-      setQuery(value);
+      setSearchParams({ query: value });
     }
   };
 
@@ -71,7 +75,7 @@ export default function Movies() {
       </form>
       {isLoading && <span>Loading</span>}
       {error && <h2>{error}</h2>}
-      {movies.length !== 0 && !isLoading && <SearchList movies={movies} />}      
+      {movies.length !== 0 && !isLoading && <SearchList movies={movies} />}
     </>
   );
 }

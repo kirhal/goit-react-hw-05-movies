@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { yearTransform } from '../../instruments/dateTransform';
 
 import { ListItem, MovieLink } from '../../pages/Home.styled';
 
@@ -7,7 +8,9 @@ export default function SearchList({ movies }) {
     <ul>
       {movies.map(movie => (
         <ListItem key={movie.id}>
-          <MovieLink to={`${movie.id}`}>{movie.title}</MovieLink>
+          <MovieLink to={`${movie.id}`}>
+            {movie.title} {`(${yearTransform(movie.release_date)})`}
+          </MovieLink>
         </ListItem>
       ))}
     </ul>
