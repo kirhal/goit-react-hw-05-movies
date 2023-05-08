@@ -40,7 +40,7 @@ export default function MovieDetails() {
     <>
       <div>
         <Link to={backLinkHref}>
-          <button>Go back</button>
+          <button>🡄 Go back</button>
         </Link>
         {isLoading && <span>Loading</span>}
         {movie.id && <MovieData movie={movie} />}
