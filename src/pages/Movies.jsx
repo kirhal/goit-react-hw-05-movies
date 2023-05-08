@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useContexFetch } from '../instruments/fetchContext';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,9 +8,10 @@ import axios from 'axios';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+// const SearchList = lazy(() => import('../components/Movies/SearchList'));
+
 export default function Movies() {
   const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const { url, key } = useContexFetch();
@@ -25,7 +26,6 @@ export default function Movies() {
 
   const fetchMovies = async query => {
     try {
-      setIsLoading(true);
       const response = await axios
         .get(
           `${url}search/movie?${key}&language=en-US&query=${query}&page=1&include_adult=false`
@@ -40,8 +40,6 @@ export default function Movies() {
       setMovies(response);
     } catch (error) {
       setError(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -72,9 +70,8 @@ export default function Movies() {
         <button type="submit">Search</button>
         <ToastContainer position="top-left" theme="colored" autoClose={2200} />
       </form>
-      {isLoading && <span>Loading</span>}
       {error && <h2>{error}</h2>}
-      {movies.length !== 0 && !isLoading && <SearchList movies={movies} />}
+      {movies.length !== 0 && <SearchList movies={movies} />}
     </>
   );
 }

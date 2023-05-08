@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useContexFetch } from '../instruments/fetchContext';
 import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
+
 import axios from 'axios';
 
 import { ListItem, MovieLink } from './Home.styled';
@@ -9,7 +10,6 @@ import MovieData from '../components/Movies/MovieData';
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
   const { url, key } = useContexFetch();
 
@@ -22,7 +22,6 @@ export default function MovieDetails() {
 
   const fetchMovie = async () => {
     try {
-      setIsLoading(true);
       const response = await axios
         .get(`${url}movie/${movieId}?${key}&language=en-US`)
         .then(res => {
@@ -31,8 +30,6 @@ export default function MovieDetails() {
       setMovie(response);
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -42,7 +39,6 @@ export default function MovieDetails() {
         <Link to={backLinkHref}>
           <button>🡄 Go back</button>
         </Link>
-        {isLoading && <span>Loading</span>}
         {movie.id && <MovieData movie={movie} />}
       </div>
       <div>
@@ -55,7 +51,9 @@ export default function MovieDetails() {
             <MovieLink to="reviews">Reviews</MovieLink>
           </ListItem>
         </ul>
+        {/* <Suspense fallback={<div>Loading...</div>}> */}
         <Outlet />
+        {/* </Suspense> */}
       </div>
     </>
   );

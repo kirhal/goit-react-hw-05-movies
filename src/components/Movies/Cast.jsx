@@ -7,7 +7,6 @@ import CastData from './CastData';
 
 export default function Cast() {
   const [cast, setCast] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
   const { url, key } = useContexFetch();
 
@@ -19,7 +18,6 @@ export default function Cast() {
 
   const fetchCast = async movieId => {
     try {
-      setIsLoading(true);
       const response = await axios
         .get(`${url}movie/${movieId}/credits?${key}&language=en-US`)
         .then(res => {
@@ -29,15 +27,8 @@ export default function Cast() {
       setCast(response);
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  return (
-    <>
-      {isLoading && <span>Loading</span>}
-      {cast.length !== 0 && !isLoading && <CastData cast={cast} />}
-    </>
-  );
+  return <>{cast.length !== 0 && <CastData cast={cast} />}</>;
 }

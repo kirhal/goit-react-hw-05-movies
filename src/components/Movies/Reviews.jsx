@@ -5,7 +5,6 @@ import axios from 'axios';
 
 export default function Reviews() {
   const [reviews, setReviews] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
   const { url, key } = useContexFetch();
 
@@ -15,7 +14,6 @@ export default function Reviews() {
 
   const fetchReviews = async movieId => {
     try {
-      setIsLoading(true);
       const response = await axios
         .get(`${url}movie/${movieId}/reviews?${key}&language=en-US&page=1`)
         .then(res => {
@@ -24,18 +22,15 @@ export default function Reviews() {
       setReviews(response);
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   return (
     <>
-      {isLoading && <span>Loading</span>}
-      {reviews.length === 0 && !isLoading && (
+      {reviews.length === 0 && (
         <h3>We don't have any reviews for this movie</h3>
       )}
-      {reviews.length !== 0 && !isLoading && (
+      {reviews.length !== 0 && (
         <ul>
           {reviews.map(review => (
             <li key={review.id}>
