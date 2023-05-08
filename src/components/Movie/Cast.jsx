@@ -1,5 +1,5 @@
 import { useState, useEffect, lazy } from 'react';
-import { useContexFetch } from '../../instruments/fetchContext';
+import { useContexFetch } from '../../instruments/useContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -7,6 +7,7 @@ const CastData = lazy(() => import('./CastData'));
 
 export default function Cast() {
   const [cast, setCast] = useState([]);
+  const [error, setError] = useState('');
   const { movieId } = useParams();
   const { url, key } = useContexFetch();
 
@@ -21,12 +22,17 @@ export default function Cast() {
 
         setCast(response);
       } catch (error) {
-        console.log(error);
+        setError(error);
       }
     };
 
     fetchCast(movieId);
   }, [movieId, key, url]);
 
-  return <>{cast.length !== 0 && <CastData cast={cast} />}</>;
+  return (
+    <>
+      {error && <h2>{error}</h2>}
+      {cast.length !== 0 && <CastData cast={cast} />}
+    </>
+  );
 }

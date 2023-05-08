@@ -7,9 +7,12 @@ import { BackButton, Container, Poster, MovieInfo } from './MovieData.styled';
 
 export default function MovieData({ movie }) {
   const location = useLocation();
-  const backLinkHref = useRef(location.state?.from ?? '/movies');  
+  const backLinkHref = useRef(location.state?.from ?? '/movies');
 
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w300';
+  const defaultImage =
+    'https://i.postimg.cc/Kj28Cmn0/default-movie-800x800.jpg';
+  console.log(movie);
 
   const genresMap = array => {
     return array
@@ -25,10 +28,14 @@ export default function MovieData({ movie }) {
         <BackButton>🡄 Go back</BackButton>
       </Link>
       <Container>
-        <Poster src={IMAGE_URL + movie.poster_path} alt={movie.title} />
+        <Poster
+          src={movie.poster_path ? IMAGE_URL + movie.poster_path : defaultImage}
+          alt={movie.title}
+        />
         <MovieInfo>
           <h2>
-            {movie.title} {`(${yearTransform(movie.release_date)})`}
+            {movie.title ? movie.title : movie.original_title}{' '}
+            {`(${yearTransform(movie.release_date)})`}
           </h2>
           <p>
             User scores: {movie.vote_average.toFixed(1)}

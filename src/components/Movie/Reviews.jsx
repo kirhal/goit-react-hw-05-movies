@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useContexFetch } from '../../instruments/fetchContext';
+import { useContexFetch } from '../../instruments/useContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -24,7 +24,7 @@ export default function Reviews() {
         }
         setReviews(response);
       } catch (error) {
-        console.log(error);
+        setError(error);
       }
     };
 
@@ -33,7 +33,7 @@ export default function Reviews() {
 
   return (
     <>
-      {error && <Title>We don't have any reviews for this movie</Title>}
+      {error && <Title>{error}</Title>}
       {reviews.length > 0 && (
         <List>
           {reviews.map(review => (

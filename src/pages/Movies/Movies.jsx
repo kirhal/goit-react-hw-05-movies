@@ -1,13 +1,13 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useContexFetch } from '../../instruments/fetchContext';
+import { useContexFetch } from '../../instruments/useContext';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { Input, Button } from './Movies.styled';
 
-const SearchList = lazy(() => import('./SearchList'));
+const MoviesList = lazy(() => import('../../components/Movie/MoviesList'));
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
@@ -15,7 +15,7 @@ export default function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { url, key } = useContexFetch();
 
-  const query = searchParams.get('query') ?? '';
+  const query = searchParams.get('query') ?? '';  
 
   useEffect(() => {
     const fetchMovies = async query => {
@@ -45,7 +45,6 @@ export default function Movies() {
     e.preventDefault();
     const form = e.currentTarget;
     const value = form.elements.input.value.trim().toLowerCase();
-
     if (value.length === 0) {
       toast.error('Write query in the searchbar');
     } else if (value === query) {
@@ -71,7 +70,7 @@ export default function Movies() {
       {error && <h2>{error}</h2>}
       {movies.length !== 0 && (
         <Suspense fallback={<div>Loading...</div>}>
-          <SearchList movies={movies} />
+          <MoviesList movies={movies} />
         </Suspense>
       )}
     </>

@@ -25,6 +25,8 @@ export const Container = styled.div`
 `;
 
 export const Poster = styled.img`
+  width: 300px;
+  height: 450px;
   display: block;
   border-radius: 3px;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),

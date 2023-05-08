@@ -11,11 +11,12 @@ export default function CastData({ cast }) {
     <List>
       {cast.map(actor => (
         <li key={actor.cast_id}>
-          {actor.profile_path ? (
-            <Image src={IMAGE_URL + actor.profile_path} alt={actor.name} />
-          ) : (
-            <Image src={defaultImage} alt={actor.name} />
-          )}
+          <Image
+            src={
+              actor.profile_path ? IMAGE_URL + actor.profile_path : defaultImage
+            }
+            alt={actor.name}
+          />
           <Character>
             <Name>
               <Wrapper>Name:</Wrapper> {actor.name}

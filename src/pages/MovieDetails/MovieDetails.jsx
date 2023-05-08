@@ -1,5 +1,5 @@
 import { useState, useEffect, Suspense } from 'react';
-import { useContexFetch } from '../../instruments/fetchContext';
+import { useContexFetch } from '../../instruments/useContext';
 import { useParams, Outlet } from 'react-router-dom';
 
 import axios from 'axios';
@@ -16,6 +16,7 @@ import MovieData from '../../components/Movie/MovieData';
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState({});
+  const [error, setError] = useState('');
   const { movieId } = useParams();
   const { url, key } = useContexFetch();
 
@@ -29,7 +30,7 @@ export default function MovieDetails() {
           });
         setMovie(response);
       } catch (error) {
-        console.log(error);
+        setError(error);
       }
     };
     fetchMovie();
@@ -37,6 +38,7 @@ export default function MovieDetails() {
 
   return (
     <>
+      {error && <h2>{error}</h2>}
       {movie.id && <MovieData movie={movie} />}
       <AdditionalData>
         <Span>Additional information</Span>

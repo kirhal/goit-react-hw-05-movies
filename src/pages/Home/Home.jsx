@@ -1,50 +1,35 @@
-import { useState, useEffect } from 'react';
-import { useContexFetch } from '../../instruments/fetchContext';
-import { yearTransform } from '../../instruments/dateTransform';
-import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+import { useState, useEffect, lazy, Suspense } from 'react';
+import * as API from '../../instruments/fetchAPI';
 
-import { ListItem, MovieLink, Title, Loading } from './Home.styled';
+import { Title} from './Home.styled';
+
+const MoviesList = lazy(() => import('../../components/Movie/MoviesList'));
 
 export default function Home() {
   const [trending, setTrending] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const { url, key } = useContexFetch();
-
-  const location = useLocation();
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchTrending = async () => {
-      const DAY_TREND = 'trending/movie/day?';
+    const fetch = async () => {
       try {
-        setIsLoading(true);
-        const response = await axios.get(`${url}${DAY_TREND}${key}`);
+        const response = await API.fetchTrending();
         setTrending(response.data.results);
       } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
+        setError(error);
       }
     };
 
-    fetchTrending();
-  }, [url, key]);
+    fetch();
+  }, []);
 
   return (
     <>
       <Title>Tranding today</Title>
-      {isLoading && <Loading>Loading...</Loading>}
+      {error && <h2>{error}</h2>}
       {trending.length > 0 && (
-        <ul>
-          {trending.map(movie => (
-            <ListItem key={movie.id}>
-              <MovieLink to={`/movies/${movie.id}`} state={{ from: location }}>
-                {/* <img src={IMAGE_URL + movie.poster_path} /> */}
-                {movie.title} {`(${yearTransform(movie.release_date)})`}
-              </MovieLink>
-            </ListItem>
-          ))}
-        </ul>
+        <Suspense fallback={<div>Loading...</div>}>
+          <MoviesList movies={trending} />
+        </Suspense>
       )}
     </>
   );
