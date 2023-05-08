@@ -3,6 +3,8 @@ import { useContexFetch } from '../../instruments/useContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import { Title } from './Cast.styled';
+
 const CastData = lazy(() => import('./CastData'));
 
 export default function Cast() {
@@ -19,7 +21,9 @@ export default function Cast() {
           .then(res => {
             return res.data.cast;
           });
-
+        if (response.length === 0) {
+          setError("We don't have any available cast for this movie");
+        }
         setCast(response);
       } catch (error) {
         setError(error);
@@ -31,8 +35,8 @@ export default function Cast() {
 
   return (
     <>
-      {error && <h2>{error}</h2>}
-      {cast.length !== 0 && <CastData cast={cast} />}
+      {error && <Title>{error}</Title>}
+      {cast.length > 0 && <CastData cast={cast} />}
     </>
   );
 }

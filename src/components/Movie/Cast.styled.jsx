@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const List = styled.ul`
   list-style: none;
 `;
-
 export const Image = styled.img`
   width: 200px;
 `;
@@ -17,4 +16,7 @@ export const Name = styled.span`
 `;
 export const Wrapper = styled.span`
   font-weight: bold;
+`;
+export const Title = styled.h3`
+  padding-left: 20px;
 `;
