@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { yearTransform } from '../../instruments/dateTransform';
 
-import { ListItem, MovieLink } from '../../pages/Home.styled';
+import { ListItem, MovieLink } from '../../pages/Home/Home.styled';
 
 export default function SearchList({ movies }) {
   const location = useLocation();

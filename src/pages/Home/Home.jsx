@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useContexFetch } from '../instruments/fetchContext';
-import { yearTransform } from '../instruments/dateTransform';
+import { useContexFetch } from '../../instruments/fetchContext';
+import { yearTransform } from '../../instruments/dateTransform';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-import { ListItem, MovieLink } from './Home.styled';
+import { ListItem, MovieLink, Title } from './Home.styled';
 
 export default function Home() {
-  const [trending, setTrending] = useState([]);  
+  const [trending, setTrending] = useState([]);
   const { url, key } = useContexFetch();
 
   const location = useLocation();
@@ -20,7 +20,7 @@ export default function Home() {
 
   const fetchTrending = async () => {
     const DAY_TREND = 'trending/movie/day?';
-    try {      
+    try {
       const response = await axios.get(`${url}${DAY_TREND}${key}`);
       setTrending(response.data.results);
     } catch (error) {
@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <>
-      <h1>Tranding today</h1>      
+      <Title>Tranding today</Title>
       {trending.length > 0 && (
         <ul>
           {trending.map(movie => (

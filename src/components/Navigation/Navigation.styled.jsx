@@ -15,9 +15,9 @@ export const StyledLink = styled(NavLink)`
 
   font-size: 30px;
   font-weight: bold;
-  font-family: Roboto;
 
   &.active {
     color: red;
+    text-decoration: underline;
   }
 `;

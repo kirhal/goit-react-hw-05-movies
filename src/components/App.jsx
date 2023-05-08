@@ -1,11 +1,11 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Home from 'pages/Home';
-import Movies from 'pages/Movies';
+import Home from 'pages/Home/Home';
+import Movies from 'pages/Movies/Movies';
 import NotFound from 'pages/NotFound';
 import Navigation from 'components/Navigation/Navigation';
-import MovieDetails from '../pages/MovieDetails';
+import MovieDetails from '../pages/MovieDetails/MovieDetails';
 import Cast from './Movies/Cast';
 import Reviews from './Movies/Reviews';
 

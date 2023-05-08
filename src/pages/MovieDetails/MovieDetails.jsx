@@ -1,12 +1,12 @@
 import { useState, useEffect, Suspense } from 'react';
-import { useContexFetch } from '../instruments/fetchContext';
+import { useContexFetch } from '../../instruments/fetchContext';
 import { useParams, Outlet, useLocation, Link } from 'react-router-dom';
 
 import axios from 'axios';
 
-import { ListItem, MovieLink } from './Home.styled';
+import { ListItem, MovieLink } from '../Home/Home.styled';
 
-import MovieData from '../components/Movies/MovieData';
+import MovieData from '../../components/Movies/MovieData';
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState({});

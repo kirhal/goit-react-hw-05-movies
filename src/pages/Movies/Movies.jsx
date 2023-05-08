@@ -1,8 +1,8 @@
 import { useState, useEffect, lazy } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useContexFetch } from '../instruments/fetchContext';
+import { useContexFetch } from '../../instruments/fetchContext';
 import { ToastContainer, toast } from 'react-toastify';
-import SearchList from '../components/Movies/SearchList';
+import SearchList from '../../components/Movies/SearchList';
 
 import axios from 'axios';
 
