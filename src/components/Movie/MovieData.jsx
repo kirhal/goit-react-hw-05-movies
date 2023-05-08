@@ -7,7 +7,8 @@ import { BackButton, Container, Poster, MovieInfo } from './MovieData.styled';
 
 export default function MovieData({ movie }) {
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/movies';
+  const backLinkHref = useRef(location.state?.from ?? '/movies');
+  console.log(backLinkHref);
 
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w300';
 
@@ -21,7 +22,7 @@ export default function MovieData({ movie }) {
 
   return (
     <>
-      <Link to={backLinkHref}>
+      <Link to={backLinkHref.current}>
         <BackButton>🡄 Go back</BackButton>
       </Link>
       <Container>
