@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { useContexFetch } from '../../instruments/fetchContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import CastData from './CastData';
+
+const CastData = lazy(() => import('./CastData'));
 
 export default function Cast() {
   const [cast, setCast] = useState([]);

@@ -7,8 +7,7 @@ import { BackButton, Container, Poster, MovieInfo } from './MovieData.styled';
 
 export default function MovieData({ movie }) {
   const location = useLocation();
-  const backLinkHref = useRef(location.state?.from ?? '/movies');
-  console.log(backLinkHref);
+  const backLinkHref = useRef(location.state?.from ?? '/movies');  
 
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w300';
 

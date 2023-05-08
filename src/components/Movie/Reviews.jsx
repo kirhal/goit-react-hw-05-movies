@@ -3,10 +3,11 @@ import { useContexFetch } from '../../instruments/fetchContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import { List, Author, Text } from './Reviews.styled';
+import { List, Author, Text, Title } from './Reviews.styled';
 
 export default function Reviews() {
   const [reviews, setReviews] = useState([]);
+  const [error, setError] = useState('');
   const { movieId } = useParams();
   const { url, key } = useContexFetch();
 
@@ -21,6 +22,9 @@ export default function Reviews() {
         .then(res => {
           return res.data.results;
         });
+      if (response.length === 0) {
+        setError("We don't have any reviews for this movie");
+      }
       setReviews(response);
     } catch (error) {
       console.log(error);
@@ -29,10 +33,8 @@ export default function Reviews() {
 
   return (
     <>
-      {reviews.length === 0 && (
-        <h3>We don't have any reviews for this movie</h3>
-      )}
-      {reviews.length !== 0 && (
+      {error && <Title>We don't have any reviews for this movie</Title>}
+      {reviews.length > 0 && (
         <List>
           {reviews.map(review => (
             <li key={review.id}>

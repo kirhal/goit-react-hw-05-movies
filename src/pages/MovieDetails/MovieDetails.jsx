@@ -49,9 +49,9 @@ export default function MovieDetails() {
           </ListItem>
         </ul>
       </AdditionalData>
-      {/* <Suspense fallback={<div>Loading...</div>}> */}
-      <Outlet />
-      {/* </Suspense> */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }
