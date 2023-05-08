@@ -3,6 +3,8 @@ import { useContexFetch } from '../../instruments/fetchContext';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import { List, Author, Text } from './Reviews.styled';
+
 export default function Reviews() {
   const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
@@ -31,14 +33,14 @@ export default function Reviews() {
         <h3>We don't have any reviews for this movie</h3>
       )}
       {reviews.length !== 0 && (
-        <ul>
+        <List>
           {reviews.map(review => (
             <li key={review.id}>
-              <span>Author: {review.author_details.username}</span>
-              <p>{review.content}</p>
+              <Author>Author: {review.author_details.username}</Author>
+              <Text>{review.content}</Text>
             </li>
           ))}
-        </ul>
+        </List>
       )}
     </>
   );

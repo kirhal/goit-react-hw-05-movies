@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import {} from './Cast.styled';
+
 export default function CastData({ cast }) {
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w300';
   const defaultImage =

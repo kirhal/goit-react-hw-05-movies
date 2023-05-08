@@ -6,8 +6,8 @@ import Movies from 'pages/Movies/Movies';
 import NotFound from 'pages/NotFound';
 import Navigation from 'components/Navigation/Navigation';
 import MovieDetails from '../pages/MovieDetails/MovieDetails';
-import Cast from './Movies/Cast';
-import Reviews from './Movies/Reviews';
+import Cast from './Movie/Cast';
+import Reviews from './Movie/Reviews';
 
 // const Home = lazy(() => import('pages/Home'));
 // const Movies = lazy(() => import('pages/Movies'));

@@ -2,11 +2,12 @@ import { useState, useEffect, lazy } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useContexFetch } from '../../instruments/fetchContext';
 import { ToastContainer, toast } from 'react-toastify';
-import SearchList from '../../components/Movies/SearchList';
+import SearchList from './SearchList';
 
 import axios from 'axios';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { Input, Button } from './Movies.styled';
 
 // const SearchList = lazy(() => import('../components/Movies/SearchList'));
 
@@ -60,14 +61,14 @@ export default function Movies() {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <input
+        <Input
           type="text"
           autoComplete="off"
           autoFocus
           placeholder="Search movies"
           name="input"
-        ></input>
-        <button type="submit">Search</button>
+        ></Input>
+        <Button type="submit">Search</Button>
         <ToastContainer position="top-left" theme="colored" autoClose={2200} />
       </form>
       {error && <h2>{error}</h2>}
