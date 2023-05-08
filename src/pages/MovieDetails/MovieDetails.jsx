@@ -20,21 +20,20 @@ export default function MovieDetails() {
   const { url, key } = useContexFetch();
 
   useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const response = await axios
+          .get(`${url}movie/${movieId}?${key}&language=en-US`)
+          .then(res => {
+            return res.data;
+          });
+        setMovie(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchMovie();
-  }, []);
-
-  const fetchMovie = async () => {
-    try {
-      const response = await axios
-        .get(`${url}movie/${movieId}?${key}&language=en-US`)
-        .then(res => {
-          return res.data;
-        });
-      setMovie(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  }, [url, key, movieId]);
 
   return (
     <>

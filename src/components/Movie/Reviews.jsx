@@ -12,24 +12,24 @@ export default function Reviews() {
   const { url, key } = useContexFetch();
 
   useEffect(() => {
-    fetchReviews(movieId);
-  }, []);
-
-  const fetchReviews = async movieId => {
-    try {
-      const response = await axios
-        .get(`${url}movie/${movieId}/reviews?${key}&language=en-US&page=1`)
-        .then(res => {
-          return res.data.results;
-        });
-      if (response.length === 0) {
-        setError("We don't have any reviews for this movie");
+    const fetchReviews = async movieId => {
+      try {
+        const response = await axios
+          .get(`${url}movie/${movieId}/reviews?${key}&language=en-US&page=1`)
+          .then(res => {
+            return res.data.results;
+          });
+        if (response.length === 0) {
+          setError("We don't have any reviews for this movie");
+        }
+        setReviews(response);
+      } catch (error) {
+        console.log(error);
       }
-      setReviews(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+
+    fetchReviews(movieId);
+  }, [url, key, movieId]);
 
   return (
     <>

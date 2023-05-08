@@ -11,22 +11,22 @@ export default function Cast() {
   const { url, key } = useContexFetch();
 
   useEffect(() => {
+    const fetchCast = async movieId => {
+      try {
+        const response = await axios
+          .get(`${url}movie/${movieId}/credits?${key}&language=en-US`)
+          .then(res => {
+            return res.data.cast;
+          });
+
+        setCast(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchCast(movieId);
-  }, []);
-
-  const fetchCast = async movieId => {
-    try {
-      const response = await axios
-        .get(`${url}movie/${movieId}/credits?${key}&language=en-US`)
-        .then(res => {
-          return res.data.cast;
-        });
-
-      setCast(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  }, [movieId, key, url]);
 
   return <>{cast.length !== 0 && <CastData cast={cast} />}</>;
 }

@@ -18,29 +18,28 @@ export default function Movies() {
   const query = searchParams.get('query') ?? '';
 
   useEffect(() => {
+    const fetchMovies = async query => {
+      try {
+        const response = await axios
+          .get(
+            `${url}search/movie?${key}&language=en-US&query=${query}&page=1&include_adult=false`
+          )
+          .then(res => {
+            return res.data.results;
+          });
+
+        if (response.length === 0) {
+          setError('No results');
+        }
+        setMovies(response);
+      } catch (error) {
+        setError(error);
+      }
+    };
     if (query) {
       fetchMovies(query);
     }
-  }, [query]);
-
-  const fetchMovies = async query => {
-    try {
-      const response = await axios
-        .get(
-          `${url}search/movie?${key}&language=en-US&query=${query}&page=1&include_adult=false`
-        )
-        .then(res => {
-          return res.data.results;
-        });
-
-      if (response.length === 0) {
-        setError('No results');
-      }
-      setMovies(response);
-    } catch (error) {
-      setError(error);
-    }
-  };
+  }, [query, url, key]);
 
   const onSubmit = e => {
     e.preventDefault();

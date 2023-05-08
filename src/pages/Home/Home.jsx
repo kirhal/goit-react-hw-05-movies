@@ -13,24 +13,22 @@ export default function Home() {
 
   const location = useLocation();
 
-  // const IMAGE_URL = 'https://image.tmdb.org/t/p/w200';
-
   useEffect(() => {
-    fetchTrending();
-  }, []);
+    const fetchTrending = async () => {
+      const DAY_TREND = 'trending/movie/day?';
+      try {
+        setIsLoading(true);
+        const response = await axios.get(`${url}${DAY_TREND}${key}`);
+        setTrending(response.data.results);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const fetchTrending = async () => {
-    const DAY_TREND = 'trending/movie/day?';
-    try {
-      setIsLoading(true);
-      const response = await axios.get(`${url}${DAY_TREND}${key}`);
-      setTrending(response.data.results);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    fetchTrending();
+  }, [url, key]);
 
   return (
     <>
