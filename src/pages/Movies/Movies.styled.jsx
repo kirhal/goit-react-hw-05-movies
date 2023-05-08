@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+
 export const Input = styled.input`
   padding: 0 10px;
   margin: 40px 0;

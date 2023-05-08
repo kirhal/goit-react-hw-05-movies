@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import {} from './Cast.styled';
+import { List, Image, Character, Name, Wrapper } from './Cast.styled';
 
 export default function CastData({ cast }) {
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w300';
@@ -8,19 +8,25 @@ export default function CastData({ cast }) {
     'https://i.postimg.cc/Bvs51Cct/360-F-234348839-k-Inlh-Js-XZez-Ky-Tb-XHde6693v-S9-Aby4e-Z.jpg';
 
   return (
-    <ul>
+    <List>
       {cast.map(actor => (
         <li key={actor.cast_id}>
           {actor.profile_path ? (
-            <img src={IMAGE_URL + actor.profile_path} alt={actor.name} />
+            <Image src={IMAGE_URL + actor.profile_path} alt={actor.name} />
           ) : (
-            <img src={defaultImage} alt={actor.name} />
+            <Image src={defaultImage} alt={actor.name} />
           )}
-          <span>Name: {actor.name}</span>
-          <span>Character: {actor.character}</span>
+          <Character>
+            <Name>
+              <Wrapper>Name:</Wrapper> {actor.name}
+            </Name>
+            <Name>
+              <Wrapper>Character:</Wrapper> {actor.character}
+            </Name>
+          </Character>
         </li>
       ))}
-    </ul>
+    </List>
   );
 }
 
