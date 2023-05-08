@@ -1,15 +1,13 @@
-import { useState, useEffect, lazy } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useContexFetch } from '../../instruments/fetchContext';
 import { ToastContainer, toast } from 'react-toastify';
-import SearchList from './SearchList';
-
 import axios from 'axios';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { Input, Button } from './Movies.styled';
 
-// const SearchList = lazy(() => import('../components/Movies/SearchList'));
+const SearchList = lazy(() => import('./SearchList'));
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
@@ -72,7 +70,11 @@ export default function Movies() {
         <ToastContainer position="top-left" theme="colored" autoClose={2200} />
       </form>
       {error && <h2>{error}</h2>}
-      {movies.length !== 0 && <SearchList movies={movies} />}
+      {movies.length !== 0 && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <SearchList movies={movies} />
+        </Suspense>
+      )}
     </>
   );
 }

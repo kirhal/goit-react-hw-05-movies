@@ -9,6 +9,7 @@ import {
   MovieLink,
   AdditionalData,
   Span,
+  Loading,
 } from './MovieDetails.styled';
 
 import MovieData from '../../components/Movie/MovieData';
@@ -49,7 +50,7 @@ export default function MovieDetails() {
           </ListItem>
         </ul>
       </AdditionalData>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading>Loading...</Loading>}>
         <Outlet />
       </Suspense>
     </>

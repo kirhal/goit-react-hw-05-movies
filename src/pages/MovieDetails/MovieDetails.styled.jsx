@@ -7,6 +7,10 @@ export const AdditionalData = styled.div`
   border-top: 2px solid #b8b6b6;
   border-bottom: 2px solid #b8b6b6;
 `;
+export const Loading = styled.span`
+  display: inline-block;
+  margin-left: 20px;
+`;
 export const Span = styled.span`
   font-size: 20px;
 `;

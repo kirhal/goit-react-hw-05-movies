@@ -4,10 +4,11 @@ import { yearTransform } from '../../instruments/dateTransform';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-import { ListItem, MovieLink, Title } from './Home.styled';
+import { ListItem, MovieLink, Title, Loading } from './Home.styled';
 
 export default function Home() {
   const [trending, setTrending] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { url, key } = useContexFetch();
 
   const location = useLocation();
@@ -21,16 +22,20 @@ export default function Home() {
   const fetchTrending = async () => {
     const DAY_TREND = 'trending/movie/day?';
     try {
+      setIsLoading(true);
       const response = await axios.get(`${url}${DAY_TREND}${key}`);
       setTrending(response.data.results);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
       <Title>Tranding today</Title>
+      {isLoading && <Loading>Loading...</Loading>}
       {trending.length > 0 && (
         <ul>
           {trending.map(movie => (

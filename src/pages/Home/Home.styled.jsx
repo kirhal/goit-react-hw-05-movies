@@ -6,8 +6,10 @@ export const Title = styled.h1`
   padding-left: 20px;
   font-size: 25px;
 `;
-
-
+export const Loading = styled.span`
+  display: inline-block;
+  margin-left: 20px;
+`;
 
 export const ListItem = styled.li`
   margin-bottom: 4px;
