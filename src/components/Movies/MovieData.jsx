@@ -16,7 +16,7 @@ export default function MovieData({ movie }) {
     <>
       <img src={IMAGE_URL + movie.poster_path} alt={movie.title}></img>
       <h2>
-        {movie.original_title} {`(${yearTransform(movie.release_date)})`}
+        {movie.title} {`(${yearTransform(movie.release_date)})`}
       </h2>
       <p>
         User scores: {movie.vote_average.toFixed(1)}
@@ -30,14 +30,13 @@ export default function MovieData({ movie }) {
   );
 }
 
-// SearchList.propTypes = {
-//   array: PropTypes.string.isRequired,
-//   onClose: PropTypes.func.isRequired,
-// };
-
-// PropTypes.arrayOf(
-//   PropTypes.exact({
-//     id: PropTypes.string.isRequired,
-//     webformatURL: PropTypes.string.isRequired,
-//     largeImageURL: PropTypes.string.isRequired,
-//   })
+MovieData.prototype = {
+  movie: PropTypes.arrayOf(
+    PropTypes.shape({
+      vote_average: PropTypes.number,
+      poster_path: PropTypes.string,
+      title: PropTypes.string,
+      release_date: PropTypes.string,
+    })
+  ),
+};

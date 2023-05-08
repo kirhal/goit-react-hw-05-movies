@@ -20,14 +20,12 @@ export default function SearchList({ movies }) {
   );
 }
 
-// SearchList.propTypes = {
-//   array: PropTypes.string.isRequired,
-//   onClose: PropTypes.func.isRequired,
-// };
-
-// PropTypes.arrayOf(
-//   PropTypes.exact({
-//     id: PropTypes.string.isRequired,
-//     webformatURL: PropTypes.string.isRequired,
-//     largeImageURL: PropTypes.string.isRequired,
-//   })
+SearchList.prototype = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      release_date: PropTypes.string,
+    })
+  ),
+};

@@ -22,14 +22,13 @@ export default function CastData({ cast }) {
   );
 }
 
-// SearchList.propTypes = {
-//   array: PropTypes.string.isRequired,
-//   onClose: PropTypes.func.isRequired,
-// };
-
-// PropTypes.arrayOf(
-//   PropTypes.exact({
-//     id: PropTypes.string.isRequired,
-//     webformatURL: PropTypes.string.isRequired,
-//     largeImageURL: PropTypes.string.isRequired,
-//   })
+CastData.prototype = {
+  cast: PropTypes.arrayOf(
+    PropTypes.shape({
+      cast_id: PropTypes.number,
+      profile_path: PropTypes.string,
+      name: PropTypes.string,
+      character: PropTypes.string,
+    })
+  ),
+};
